@@ -26,3 +26,13 @@
   font-weight: 700;
   font-size: 12px;
 }
+
+.error-user {
+  color: red;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.none {
+  display: none;
+}
