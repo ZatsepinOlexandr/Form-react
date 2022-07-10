@@ -1,24 +1,19 @@
 import React from 'react';
 import { Formik } from 'formik'
-import * as yup from 'yup'
 import './App.css'
 import axios from 'axios'
+import validationsSchema from './validation'
+
+let initialValues = {
+  email: '',
+  password: '',
+}
 
 
 function App() {
-  const validationsSchema = yup.object().shape({
-    email: yup.string().email('Enter the correct email').required('Necessarily'),
-    password: yup.string()
-      .typeError('Must be a string')
-      .required('Necessarily')
-      .max(8, "Maximum is 8 symbol")
-      .matches(/[a-zA-Z]/, "Must include letters")
-      .matches(/[&,!,_,#]/, "Must include special symbol (&,!,etc.)"),
-  })
 
-
-  function handleSubmit(values) {
-    axios.post('https://lysiukapi.herokuapp.com/users/login', {
+  const onSubmit = (values) => {
+    axios.post(`https://${process.env.REACT_APP_API}`, {
 
       email: values.email,
       password: values.password
@@ -29,20 +24,21 @@ function App() {
             let error = document.getElementById('errorAlert');
             error.className.remove('none');
             break;
+
+          default:
         }
       })
   }
 
 
+
+
   return (
     <div>
       <Formik
-        initialValues={{
-          email: '',
-          password: '',
-        }}
+        initialValues={initialValues}
         validateOnBlur
-        onSubmit={(values) => { handleSubmit(values) }}
+        onSubmit={onSubmit}
         validationSchema={validationsSchema}
       >
         {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty }) => (
