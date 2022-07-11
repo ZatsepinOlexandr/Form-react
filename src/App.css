@@ -1,4 +1,4 @@
-.from {
+.form {
   display: block;
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
@@ -31,8 +31,4 @@
   color: red;
   font-size: 20px;
   font-weight: 500;
-}
-
-.none {
-  display: none;
 }
